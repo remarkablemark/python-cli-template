@@ -49,6 +49,8 @@ jobs:
       - name: Check version
         run: |
           version=$(grep version src/python_cli_template/__init__.py | cut -d'"' -f 2)
+          echo $version
+          python-cli-template --version
           set -e
           [[ $(python-cli-template --version) == $version ]]
           [[ $(python-cli-template -v) == $version ]]
