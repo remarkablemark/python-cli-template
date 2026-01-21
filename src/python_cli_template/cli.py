@@ -3,7 +3,7 @@ from argparse import ArgumentParser
 from python_cli_template import __version__, hello
 
 
-def main(argv: list[str] = []) -> None:
+def main(argv: list[str] | None = None) -> None:
     parser = ArgumentParser(description="Python CLI Template")
 
     parser.add_argument(
