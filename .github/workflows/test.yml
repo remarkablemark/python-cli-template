@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-python@v6
         with:
           cache: pip
-          python-version: 3
+          python-version-file: pyproject.toml
 
       - name: Install dependencies
         run: pip install -e .[test]
@@ -41,7 +41,7 @@ jobs:
         uses: actions/setup-python@v6
         with:
           cache: pip
-          python-version: 3
+          python-version-file: pyproject.toml
 
       - name: Install package
         run: pipx install .
@@ -50,19 +50,19 @@ jobs:
         run: |
           version=$(grep version src/python_cli_template/__init__.py | cut -d'"' -f 2)
           set -e
-          [[ $(python_cli_template --version) == $version ]]
-          [[ $(python_cli_template -v) == $version ]]
+          [[ $(python-cli-template --version) == $version ]]
+          [[ $(python-cli-template -v) == $version ]]
 
       - name: Get help
-        run: python_cli_template --help
+        run: python-cli-template --help
 
   integration:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         command:
-          - python_cli_template
-          - python_cli_template --name test
+          - python-cli-template
+          - python-cli-template --name test
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -71,7 +71,7 @@ jobs:
         uses: actions/setup-python@v6
         with:
           cache: pip
-          python-version: 3
+          python-version-file: pyproject.toml
 
       - name: Install package
         run: pipx install .

@@ -1,5 +1,5 @@
 [project]
-name = "python_cli_template"
+name = "python-cli-template"
 version = "0.0.0"
 authors = [
     { name="Mark", email="mark@remarkablemark.org" },
@@ -16,10 +16,10 @@ license-files = ["LICEN[CS]E*"]
 dependencies = []
 
 [project.scripts]
-python_cli_template = "python_cli_template.cli:main"
+python-cli-template = "python_cli_template.cli:main"
 
 [project.entry-points."pipx.run"]
-python_cli_template = "python_cli_template.cli:main"
+python-cli-template = "python_cli_template.cli:main"
 
 [project.optional-dependencies]
 build = [
@@ -42,8 +42,8 @@ test = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/remarkablemark/python_cli_template"
-Issues = "https://github.com/remarkablemark/python_cli_template/issues"
+Homepage = "https://github.com/remarkablemark/python-cli-template"
+Issues = "https://github.com/remarkablemark/python-cli-template/issues"
 
 [tool.black]
 fast = true

@@ -1,8 +1,8 @@
-# python_cli_template
+# python-cli-template
 
-[![PyPI version](https://img.shields.io/pypi/v/python_cli_template)](https://pypi.org/project/python_cli_template/)
-[![codecov](https://codecov.io/gh/remarkablemark/python_cli_template/graph/badge.svg?token=l6pg0nf9aJ)](https://codecov.io/gh/remarkablemark/python_cli_template)
-[![lint](https://github.com/remarkablemark/python_cli_template/actions/workflows/lint.yml/badge.svg)](https://github.com/remarkablemark/python_cli_template/actions/workflows/lint.yml)
+[![PyPI version](https://img.shields.io/pypi/v/python-cli-template)](https://pypi.org/project/python-cli-template/)
+[![codecov](https://codecov.io/gh/remarkablemark/python-cli-template/graph/badge.svg?token=l6pg0nf9aJ)](https://codecov.io/gh/remarkablemark/python-cli-template)
+[![lint](https://github.com/remarkablemark/python-cli-template/actions/workflows/lint.yml/badge.svg)](https://github.com/remarkablemark/python-cli-template/actions/workflows/lint.yml)
 
 🐍 Python CLI Template
 
@@ -11,7 +11,7 @@
 Greet a name:
 
 ```sh
-pipx run python_cli_template --name world
+pipx run python-cli-template --name world
 ```
 
 ## Prerequisites
@@ -24,7 +24,7 @@ pipx run python_cli_template --name world
 Install the CLI:
 
 ```sh
-pipx install python_cli_template
+pipx install python-cli-template
 ```
 
 ### `--name`
@@ -32,7 +32,7 @@ pipx install python_cli_template
 **Optional**: Name to greet. Defaults to `World`.
 
 ```sh
-python_cli_template --name Alex
+python-cli-template --name Alex
 ```
 
 ### `--version`
@@ -40,13 +40,13 @@ python_cli_template --name Alex
 Show the program's version number and exit:
 
 ```sh
-python_cli_template --version # python_cli_template -v
+python-cli-template --version # python-cli-template -v
 ```
 
 Show the help message and exit:
 
 ```sh
-python_cli_template --help # python_cli_template -h
+python-cli-template --help # python-cli-template -h
 ```
 
 ## Script
@@ -66,7 +66,7 @@ source .venv/bin/activate
 Install the package:
 
 ```sh
-pip install python_cli_template
+pip install python-cli-template
 ```
 
 Greet a name:
@@ -86,4 +86,4 @@ python script.py
 
 ## License
 
-[MIT](https://github.com/remarkablemark/python_cli_template/blob/master/LICENSE)
+[MIT](https://github.com/remarkablemark/python-cli-template/blob/master/LICENSE)

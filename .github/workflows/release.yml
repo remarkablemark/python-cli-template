@@ -31,7 +31,7 @@ jobs:
       id-token: write
     environment:
       name: pypi
-      url: https://pypi.org/p/python_cli_template
+      url: https://pypi.org/p/python-cli-template
 
     steps:
       - name: Checkout repository
@@ -40,7 +40,7 @@ jobs:
       - name: Use Python
         uses: actions/setup-python@v6
         with:
-          python-version: 3
+          python-version-file: pyproject.toml
 
       - name: Install build
         run: python -m pip install build
@@ -48,7 +48,7 @@ jobs:
       - name: Build package
         run: python -m build
 
-      - name: Publish package to PyPI
+      - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
@@ -70,33 +70,27 @@ jobs:
       - name: Use Python
         uses: actions/setup-python@v6
         with:
-          python-version: 3
+          python-version-file: pyproject.toml
 
       - name: Install dependencies
         run: pip install -e '.[build]'
 
       - name: Build executable
-        run: pyinstaller src/python_cli_template/cli.py --name python_cli_template --onefile --clean
+        run: pyinstaller src/python_cli_template/cli.py --name python-cli-template --onefile --clean
 
       - name: Compress executable
-        if: matrix.os != 'windows-latest'
-        working-directory: dist
-        run: zip archive.zip python_cli_template
-
-      - name: Compress executable
-        if: matrix.os == 'windows-latest'
-        working-directory: dist
-        run: Compress-Archive -Path python_cli_template.exe -Destination archive.zip
+        shell: bash
+        run: |
+          if [[ $RUNNER_OS == 'Windows' ]]; then
+            7z a -r archive.zip dist
+          else
+            zip -r archive.zip dist
+          fi
 
       - name: Upload Release Artifact
         shell: bash
-        working-directory: dist
         run: |
-          os=${{ matrix.os }}
-          filename=${os%-*}.zip
-          if [[ $filename == 'ubuntu'* ]]; then
-            filename=linux.zip
-          fi
+          filename=$(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]').zip
           mv archive.zip $filename
           gh release upload ${{ needs.release.outputs.tag_name }} $filename
         env:
