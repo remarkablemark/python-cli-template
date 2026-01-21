@@ -21,7 +21,7 @@ jobs:
         run: pip install -e .[lint]
 
       - name: Type check
-        run: mypy src
+        run: mypy .
 
       - name: Run Black
         run: black --check .
