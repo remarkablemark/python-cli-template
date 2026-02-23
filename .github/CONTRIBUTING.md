@@ -17,34 +17,22 @@ cd python-cli-template
 
 ## Install
 
-Install [Python](https://www.python.org/):
+Install [uv](https://docs.astral.sh/uv/):
 
 ```sh
-brew install python
+brew install uv
 ```
 
-Create the virtual environment:
+Install development dependencies:
 
 ```sh
-python3 -m venv .venv
-```
-
-Activate the virtual environment:
-
-```sh
-source .venv/bin/activate
-```
-
-Install the dependencies:
-
-```sh
-pip install -e '.[build,docs,lint,test]'
+uv sync --all-extras
 ```
 
 Install pre-commit into your git hooks:
 
 ```sh
-pre-commit install
+uv run pre-commit install
 ```
 
 ## Develop
@@ -74,38 +62,38 @@ Things that will improve the chance that your pull request will be accepted:
 
 ## Test
 
-Install the dependencies:
+Install test dependencies:
 
 ```sh
-pip install -e '.[test]'
+uv sync --extra test
 ```
 
 Run the tests:
 
 ```sh
-pytest
+uv run pytest
 ```
 
 Run the tests with [coverage](https://coverage.readthedocs.io/):
 
 ```sh
-coverage run -m pytest
+uv run coverage run -m pytest
 ```
 
 Generate a coverage report:
 
 ```sh
-coverage report
+uv run coverage report
 ```
 
 ```sh
-coverage html
+uv run coverage html
 ```
 
-Install the package with [pipx](https://pipx.pypa.io/):
+Install the package with [uv](https://docs.astral.sh/uv/):
 
 ```sh
-pipx install . --force
+uv tool install . --force
 ```
 
 Test the command:
@@ -116,80 +104,88 @@ python-cli-template --help
 
 ## Lint
 
-Install the dependencies:
+Install lint dependencies:
 
 ```sh
-pip install -e '.[lint]'
+uv sync --extra lint
 ```
 
 Update pre-commit hooks to the latest version:
 
 ```sh
-pre-commit autoupdate
+uv run pre-commit autoupdate
 ```
 
 Run all pre-commit hooks:
 
 ```sh
-pre-commit run --all-files
+uv run pre-commit run --all-files
 ```
 
-Lint all files in the current directory:
+Lint all files:
 
 ```sh
-ruff check
+uv run ruff check # --fix
 ```
 
-Format all files in the current directory:
+Format all files:
 
 ```sh
-ruff format
+uv run ruff format
+```
+
+## Run
+
+Run the CLI:
+
+```sh
+uv run python-cli-template
 ```
 
 ## Build
 
-Install the dependencies:
+Install build dependencies:
 
 ```sh
-pip install -e '.[build]'
+uv sync --extra build
 ```
 
 Generate the distribution packages:
 
 ```sh
-python3 -m build
+uv build
 ```
 
 Upload all of the archives under `dist`:
 
 ```sh
-twine upload --repository testpypi dist/*
+uv publish --repository testpypi
 ```
 
 Install the package:
 
 ```sh
-pip install --index-url https://test.pypi.org/simple/ --no-deps python-cli-template
+uv tool install --index-url testpypi python-cli-template
 ```
 
 Bundle the package with [PyInstaller](https://pyinstaller.org/):
 
 ```sh
-pyinstaller src/python-cli-template/cli.py --name python-cli-template
+uv run pyinstaller python_cli_template.cli --name python-cli-template
 ```
 
 ## Docs
 
-Install the dependencies:
+Install docs dependencies:
 
 ```sh
-pip install -e '.[docs]'
+uv sync --extra docs
 ```
 
 Generate the docs with [pdoc](https://pdoc.dev/):
 
 ```sh
-pdoc src/python_cli_template/
+uv run pdoc src/python_cli_template/
 ```
 
 ## Release

@@ -17,14 +17,20 @@ pipx run python-cli-template --name world
 ## Prerequisites
 
 - [Python](https://www.python.org/)
-- [pipx](https://pipx.pypa.io/)
+- [pipx](https://pipx.pypa.io/) or [uv](https://docs.astral.sh/uv/)
 
 ## CLI
 
-Install the CLI:
+Install with pipx:
 
 ```sh
 pipx install python-cli-template
+```
+
+Or install with uv:
+
+```sh
+uv tool install python-cli-template
 ```
 
 ### `--name`
@@ -51,22 +57,10 @@ python-cli-template --help # python-cli-template -h
 
 ## Script
 
-Create a virtual environment:
-
-```sh
-python3 -m venv .venv
-```
-
-Activate the virtual environment:
-
-```sh
-source .venv/bin/activate
-```
-
 Install the package:
 
 ```sh
-pip install python-cli-template
+uv add python-cli-template
 ```
 
 Greet a name:
@@ -81,7 +75,7 @@ print(hello("Bob"))
 Run the script:
 
 ```sh
-python script.py
+uv run script.py
 ```
 
 ## License
