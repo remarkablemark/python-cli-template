@@ -30,11 +30,6 @@ jobs:
 
   integration:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        command:
-          - python-cli-template
-          - python-cli-template --name test
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -44,9 +39,6 @@ jobs:
 
       - name: Install tool
         run: uv tool install .
-
-      - name: Run command
-        run: ${{ matrix.command }}
 
       - name: Get version
         run: |
@@ -58,3 +50,8 @@ jobs:
           set -e
           [[ $(python-cli-template --version) == "$VERSION" ]]
           [[ $(python-cli-template -v) == "$VERSION" ]]
+
+      - name: Run commands
+        run: |
+          python-cli-template
+          python-cli-template --name test
