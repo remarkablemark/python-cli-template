@@ -11,52 +11,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Use Python
-        uses: actions/setup-python@v6
-        with:
-          cache: pip
-          python-version-file: pyproject.toml
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
 
       - name: Install dependencies
-        run: pip install -e .[test]
+        run: uv sync --extra test
 
       - name: Run tests and collect coverage
         run: |
-          coverage run -m pytest
-          coverage report
-          coverage xml
+          uv run coverage run -m pytest
+          uv run coverage report
+          uv run coverage xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-
-  install:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Use Python
-        uses: actions/setup-python@v6
-        with:
-          cache: pip
-          python-version-file: pyproject.toml
-
-      - name: Install package
-        run: pipx install .
-
-      - name: Check version
-        run: |
-          version=$(grep version src/python_cli_template/__init__.py | cut -d'"' -f 2)
-          echo $version
-          python-cli-template --version
-          set -e
-          [[ $(python-cli-template --version) == $version ]]
-          [[ $(python-cli-template -v) == $version ]]
-
-      - name: Get help
-        run: python-cli-template --help
 
   integration:
     runs-on: ubuntu-latest
@@ -69,14 +39,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Use Python
-        uses: actions/setup-python@v6
-        with:
-          cache: pip
-          python-version-file: pyproject.toml
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
 
-      - name: Install package
-        run: pipx install .
+      - name: Install tool
+        run: uv tool install .
 
       - name: Run command
         run: ${{ matrix.command }}
+
+      - name: Get version
+        run: |
+          VERSION=$(grep version src/python_cli_template/__init__.py | cut -d'"' -f 2)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Check version
+        run: |
+          set -e
+          [[ $(python-cli-template --version) == "$VERSION" ]]
+          [[ $(python-cli-template -v) == "$VERSION" ]]
