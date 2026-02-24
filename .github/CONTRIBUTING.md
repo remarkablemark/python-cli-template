@@ -134,6 +134,12 @@ Format all files:
 uv run ruff format
 ```
 
+Run type checking:
+
+```sh
+uv run mypy .
+```
+
 ## Run
 
 Run the CLI:
