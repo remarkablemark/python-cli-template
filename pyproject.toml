@@ -28,7 +28,7 @@ python-cli-template = "python_cli_template.cli:main"
 build = [
     "build==1.5.1",
     "pyinstaller==6.21.0",
-    "twine==6.2.0",
+    "twine==7.0.0",
 ]
 docs = [
     "pdoc==16.0.0",
